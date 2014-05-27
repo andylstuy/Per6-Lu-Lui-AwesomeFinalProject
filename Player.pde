@@ -1,6 +1,6 @@
 public class Player{
   private int x, y;
-  private int step;
+  private int step, floor;
   private PImage img;
   
   public Player(){
@@ -22,7 +22,7 @@ public class Player{
     y-= step;
   }
   public void down(){
-    if(y < 600){
+    if(y < floor){
       y += step/2;
     }
   }
