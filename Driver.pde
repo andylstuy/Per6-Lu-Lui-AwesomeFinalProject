@@ -1,4 +1,4 @@
-
+public class Driver {
 private Player p;
 void setup(){
    size(1500,700);
@@ -27,5 +27,6 @@ void keyPressed() {
     p.right();
   }
 }
- 
+
+} 
 
