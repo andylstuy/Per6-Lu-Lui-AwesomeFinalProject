@@ -5,8 +5,9 @@ public class Player{
   
   public Player(){
     x = 70;
-    y = 600;
+    y = 640;
     step = 10;
+    floor = 640;
   }
   
   public void right(){
@@ -25,6 +26,9 @@ public class Player{
     if(y < floor){
       y += step/2;
     }
+  }
+  public void setFloor(int f){
+    floor = f;
   }
   
   void draw(){
