@@ -1,4 +1,3 @@
-public class Driver {
 private Player p;
 private Enemy1 e;
 void setup(){
@@ -31,6 +30,4 @@ void keyPressed() {
     p.right();
   }
 }
-
-} 
 
