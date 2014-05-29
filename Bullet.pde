@@ -20,6 +20,7 @@ public class Bullet{
 
   void draw(){
     line(x,y,x+7,y);
+    //rect(x-5,y-5,15,10);
     move();
   }
   
