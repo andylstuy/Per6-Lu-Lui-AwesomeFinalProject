@@ -13,7 +13,7 @@ void setup(){
 }
   
 void draw() {
-  background(255,255,255);
+  background(0,100,190);
   line(0,650,1500,650);     
   p.draw();
   p.down();
