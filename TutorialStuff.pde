@@ -4,8 +4,8 @@ PImage img;
 void setup() {
   size(685,540);
   img = loadImage("Wright_Objection_Hobo_Style.png"); 
-  /*image file must be in a folder named "data" in the same 
-    directory as the Driver file in order to be imported*/
+  //image file must be in a folder named "data" in the same 
+  //directory as the Driver file in order to be imported
 }
 
 void draw() {
