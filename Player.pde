@@ -1,7 +1,7 @@
 public class Player{
   private int x, y;
   private int step, floor;
-  private Bullet b;
+  private ArrayList<Bullet> b;
   private boolean right;
   private PImage img;
   
@@ -10,6 +10,7 @@ public class Player{
     y = 640;
     step = 30;
     floor = 640;
+    b = new ArrayList<Bullet>();
   }
   
   public void right(){
@@ -40,19 +41,19 @@ public class Player{
   
   public void shoot(){
     if(right){
-      b = new Bullet(x+13,y,150,right);
+      b.add(new Bullet(x+13,y,150,right));
     }else{
-      b = new Bullet(x-16,y,150,right);
+      b.add(new Bullet(x-16,y,150,right));
     }  
   }
   
   void draw(){
     ellipse(x,y,20,20);
-    if(b != null){
-      b.draw();
-      if(b.dead()){
-        b = null;
-      }
+    for(int i = 0; i < b.size(); i++){
+        b.get(i).draw();
+        if(b.get(i).dead()){
+          b.remove(i);
+        }   
     }
   }
 
