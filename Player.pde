@@ -8,9 +8,16 @@ public class Player{
   public Player(){
     x = 70;
     y = 640;
-    step = 30;
+    step = 100;
     floor = 640;
     b = new ArrayList<Bullet>();
+  }
+  
+  public int getX(){
+    return x;
+  }
+  public int getY(){
+    return y;
   }
   
   public void right(){
@@ -31,12 +38,12 @@ public class Player{
   
   public void down(){
     if(y < floor ){
-      y += step/5;
+      y += 5;
     }
   }
   
   public void setFloor(int f){
-    floor = f;
+    this.floor = f;
   }
   
   public void shoot(){
