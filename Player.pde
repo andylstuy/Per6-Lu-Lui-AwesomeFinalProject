@@ -3,16 +3,21 @@ public class Player{
   private int step, floor;
   private ArrayList<Bullet> b;
   private boolean right;
+  private ArrayList<Platform> platforms;
   private PImage img;
   
   public Player(){
     x = 70;
     y = 640;
-    step = 100;
+    step = 10;
     floor = 640;
     b = new ArrayList<Bullet>();
+    platforms = new ArrayList<Platform>();
   }
   
+  public void addPlatform(Platform p){
+    platforms.add(p);
+  }
   public int getX(){
     return x;
   }
@@ -32,7 +37,7 @@ public class Player{
   }
   public void up(){
     if( y > 30)
-    y-= step;
+    y-= step*10;
   }
   
   
@@ -48,9 +53,9 @@ public class Player{
   
   public void shoot(){
     if(right){
-      b.add(new Bullet(x+13,y,150,right));
+      b.add(new Bullet(x+13,y,250,right));
     }else{
-      b.add(new Bullet(x-16,y,150,right));
+      b.add(new Bullet(x-16,y,250,right));
     }  
   }
   
@@ -62,6 +67,17 @@ public class Player{
           b.remove(i);
         }   
     }
+    for(int i = 0; i < platforms.size(); i++){
+    Platform pl = platforms.get(i);
+    pl.draw();
+    if(p.getX() < pl.maxX() && p.getX() > pl.minX() && p.getY() < pl.y()){
+      p.setFloor(pl.y());
+     
+    }else if(i >= platforms.size()){
+      p.setFloor(640);
+    }
+    }
+  
   }
 
 }
