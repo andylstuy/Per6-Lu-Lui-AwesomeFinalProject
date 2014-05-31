@@ -1,6 +1,6 @@
 public class Player{
   private int x, y;
-  private int step, floor;
+  private int step, floor, atk, health;
   private ArrayList<Bullet> b;
   private boolean right;
   private ArrayList<Platform> platforms;
@@ -11,8 +11,13 @@ public class Player{
     y = 640;
     step = 10;
     floor = 640;
+    atk = 1;
+    health = 3;
     b = new ArrayList<Bullet>();
     platforms = new ArrayList<Platform>();
+  }
+  public ArrayList<Bullet> bullets(){
+    return b;
   }
   
   public void addPlatform(Platform p){
@@ -23,6 +28,18 @@ public class Player{
   }
   public int getY(){
     return y;
+  }
+  
+  public void damaged(int d){
+    health-= d;
+  }
+  public int getHealth(){
+    return health;
+  }
+  
+  public void returnToStart(){
+    x = 70;
+    y = 640;
   }
   
   public void right(){
