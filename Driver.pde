@@ -1,6 +1,13 @@
 private Player p;
 private ArrayList<Enemy1> enemies;
 
+public boolean collision(Bullet bull, Enemy1 e){
+  return abs(bull.getX() - e.getX()) < 20 && abs(bull.getY() - e.getY()) < 20;  
+   
+}
+public boolean collision(Player p, Enemy1 e){
+  return abs(p.getX() - e.getX()) < 20 && abs(p.getY() - e.getY()) < 20;  
+}
 
 void setup(){
    size(1500,700);
@@ -24,11 +31,29 @@ void draw() {
   background(0,100,190);
   //line(0,650,1500,650); 
   rect(0,650,1500,10); 
-   
-  p.draw();
-  
-  for(Enemy1 e : enemies){
+  textSize(30);
+  text("Health: " +p.getHealth(), 10,25);
+  if(p.getHealth() > 0){ 
+    p.draw();
+  }else{
+    textSize(64);
+    text("You Lose!", 650, 200);
+  }
+  for(int i = 0; i < enemies.size(); i++){
+    Enemy1 e = enemies.get(i);
     e.draw();
+    if(collision(p, e)){
+      p.damaged(e.atk);
+      p.returnToStart();
+    }
+    for(Bullet bull : p.bullets()){
+      if(collision(bull, e)){
+        bull.setDead(true);
+        enemies.remove(i);
+       
+      }
+    }
+    
   }
   /*for(int i = 0; i < platforms.size(); i++){
     Platform pl = platforms.get(i);
@@ -58,9 +83,15 @@ void keyPressed() {
   }
   if(key == 'q'){
     p.left();
+    p.left();
+    p.left();
+    p.left();
     p.up();
   }
   if(key == 'e'){
+    p.right();
+    p.right();
+    p.right();
     p.right();
     p.up();
   }
