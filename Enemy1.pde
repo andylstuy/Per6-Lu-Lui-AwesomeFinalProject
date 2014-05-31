@@ -1,8 +1,8 @@
 public class Enemy1{
-  private int health, attack;
+  private int health, atk;
   private int x,y;
   private int step, maxRight, maxLeft;
-  private boolean right;
+  private boolean right, dead;
   
   public Enemy1(int x, int y, int range){
     this.x = x;
@@ -11,6 +11,25 @@ public class Enemy1{
     maxLeft = this.x - range;
     step = 3;
     this.right = true;    
+    health = 1;
+    atk = 1;
+    dead = false;
+  }
+  
+  public boolean dead(){
+    return dead;
+  }
+  public void setDead(boolean b){
+    dead = b;
+  }
+  public int getX(){
+    return x;
+  }
+  public int getY(){
+    return y;
+  }
+  public int attack(){
+    return atk;
   }
   void draw(){
     rect(x,y,20,20);
@@ -21,6 +40,9 @@ public class Enemy1{
       x-= step;
     }else{
       right = true;
+    }
+    if(health <= 0){
+      dead = true;
     }
   }
 
