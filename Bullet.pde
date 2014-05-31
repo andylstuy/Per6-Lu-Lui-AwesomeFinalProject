@@ -13,10 +13,19 @@ public class Bullet{
     this.dead = false;
   }
   
+  public int getX(){
+    return x;
+  }
+  public int getY(){
+    return y;
+  }
+  
   public boolean dead(){
     return dead;
   }
-  
+  public void setDead(boolean b){
+    dead = b;
+  }
 
   void draw(){
     line(x,y,x+7,y);
