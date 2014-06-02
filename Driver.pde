@@ -32,7 +32,7 @@ void draw() {
   //line(0,650,1500,650); 
   rect(0,650,1500,10); 
   textSize(30);
-  text("Health: " +p.getHealth(), 10,25);
+  text("Lives: " +p.getHealth(), 10,25);
   if(p.getHealth() > 0){ 
     p.draw();
   }else{
