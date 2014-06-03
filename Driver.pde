@@ -58,16 +58,6 @@ void draw() {
     }
     
   }
-  /*for(int i = 0; i < platforms.size(); i++){
-    Platform pl = platforms.get(i);
-    pl.draw();
-    if(p.getX() < pl.maxX() && p.getX() > pl.minX() && p.getY() < pl.y()){
-      p.setFloor(pl.y());
-     
-    }else if(i >= platforms.size()){
-      p.setFloor(640);
-    }
-  }*/
   p.down();
   
   
