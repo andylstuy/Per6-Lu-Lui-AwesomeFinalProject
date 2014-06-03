@@ -100,8 +100,6 @@ public class Player{
       p.setFloor(640);
     }else if(p.getX() < pl.maxX() && p.getX() > pl.minX() && p.getY() < pl.y()){
       possible.add(pl);
-      
-     
     }
     }
     int i = 0;
