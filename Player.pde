@@ -85,14 +85,7 @@ public class Player{
     }  
   }
   
-  void draw(){
-    ellipse(x,y,20,20);
-    for(int i = 0; i < b.size(); i++){
-        b.get(i).draw();
-        if(b.get(i).dead()){
-          b.remove(i);
-        }   
-    }
+  public void drawAndIdentifyPlatforms() {
     for(int i = 0; i < platforms.size(); i++){
     Platform pl = platforms.get(i);
     pl.draw();
@@ -111,7 +104,17 @@ public class Player{
       i++;
     }
     p.setFloor(smallest);
+  }
   
+  void draw(){
+    ellipse(x,y,20,20);
+    for(int i = 0; i < b.size(); i++){
+        b.get(i).draw();
+        if(b.get(i).dead()){
+          b.remove(i);
+        }   
+    }
+    drawAndIdentifyPlatforms();
   }
 
 }
