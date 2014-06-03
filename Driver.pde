@@ -18,6 +18,9 @@ void setup(){
    enemies.add(new Enemy1(625,625,100)); 
    enemies.add(new Enemy1(500,305,100));
    enemies.add(new Enemy1(95,525,70));
+   enemies.add(new Enemy1(355,525,70));
+   enemies.add(new Enemy1(205,125,90));
+   enemies.add(new Enemy1(15,65,200));
    
    
    
@@ -96,6 +99,9 @@ void keyPressed() {
     p.up();
   }
   if (key == 'j'){
-    p.shoot();
+    p.shoot(1);
+  }
+  if (key == 'k'){
+    p.shoot(2);
   }
 }
