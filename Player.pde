@@ -3,7 +3,7 @@ public class Player{
   private int step, floor, atk, health;
   private ArrayList<Bullet> b;
   private boolean right;
-  private ArrayList<Platform> platforms;
+  private ArrayList<Platform> platforms, possible;
   private PImage img;
   
   public Player(){
@@ -15,13 +15,22 @@ public class Player{
     health = 3;
     b = new ArrayList<Bullet>();
     platforms = new ArrayList<Platform>();
+    possible = new ArrayList<Platform>();
   }
   public ArrayList<Bullet> bullets(){
     return b;
   }
   
   public void addPlatform(Platform p){
+    
+    /*for(int i = 0; i < platforms.size(); i ++){
+      if(p.y() >= platforms.get(i).y()){
+        platforms.add(i,p);
+        return 1;
+      }
+    }*/
     platforms.add(p);
+    //return 0; 
   }
   public int getX(){
     return x;
@@ -68,11 +77,11 @@ public class Player{
     this.floor = f;
   }
   
-  public void shoot(){
+  public void shoot(int gun){
     if(right){
-      b.add(new Bullet(x+13,y,250,right));
+      b.add(new Bullet(x+13,y,250,right,gun));
     }else{
-      b.add(new Bullet(x-16,y,250,right));
+      b.add(new Bullet(x-16,y,250,right,gun));
     }  
   }
   
@@ -87,13 +96,23 @@ public class Player{
     for(int i = 0; i < platforms.size(); i++){
     Platform pl = platforms.get(i);
     pl.draw();
-    if(p.getX() < pl.maxX() && p.getX() > pl.minX() && p.getY() < pl.y()){
-      p.setFloor(pl.y());
-     
-    }else if(i >= platforms.size()){
+    if(i >= platforms.size()){
       p.setFloor(640);
+    }else if(p.getX() < pl.maxX() && p.getX() > pl.minX() && p.getY() < pl.y()){
+      possible.add(pl);
+      
+     
     }
     }
+    int i = 0;
+    int smallest = 640;
+    while(i < possible.size()){
+      if(possible.get(i).y() < smallest){
+        smallest = possible.get(i).y();
+      }
+      i++;
+    }
+    p.setFloor(smallest);
   
   }
 
