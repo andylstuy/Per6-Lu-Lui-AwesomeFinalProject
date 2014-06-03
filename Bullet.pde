@@ -2,8 +2,9 @@ public class Bullet{
   private int x, y;
   private int step, maxX, minX;
   private boolean right, dead;
+  private int gun;
   
-  public Bullet(int x, int y, int range, boolean right){
+  public Bullet(int x, int y, int range, boolean right, int gun){
     this.x = x;
     this.y = y;
     this.maxX = x + range;
@@ -11,6 +12,7 @@ public class Bullet{
     this.right = right;
     this.step = 5;
     this.dead = false;
+    this.gun = gun;
   }
   
   public int getX(){
@@ -26,10 +28,16 @@ public class Bullet{
   public void setDead(boolean b){
     dead = b;
   }
+  public void setGun(int i){
+    gun = i;
+  }
 
   void draw(){
-    line(x,y,x+7,y);
-    //rect(x-5,y-5,15,10);
+    if(gun == 1){ 
+      line(x,y,x+7,y);
+    }else if (gun == 2){
+      rect(x-5,y-5,15,10);
+    }
     move();
   }
   
