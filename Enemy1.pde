@@ -7,6 +7,12 @@ public class Enemy1 extends Enemy{
     this.y = y;
     maxRight = this.x + range;
     maxLeft = this.x - range;
+    if(maxLeft < 0){
+      maxLeft = 0;
+    }
+    if (maxRight > 1500){
+      maxRight = 1500;
+    }
     step = 3;
     this.right = true;    
     health = 1;
