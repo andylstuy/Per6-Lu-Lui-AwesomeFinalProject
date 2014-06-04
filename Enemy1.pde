@@ -1,8 +1,6 @@
-public class Enemy1{
-  private int health, atk;
-  private int x,y;
-  private int step, maxRight, maxLeft;
-  private boolean right, dead;
+public class Enemy1 extends Enemy{
+  protected int maxRight, maxLeft;
+  protected boolean right;
   
   public Enemy1(int x, int y, int range){
     this.x = x;
@@ -16,21 +14,7 @@ public class Enemy1{
     dead = false;
   }
   
-  public boolean dead(){
-    return dead;
-  }
-  public void setDead(boolean b){
-    dead = b;
-  }
-  public int getX(){
-    return x;
-  }
-  public int getY(){
-    return y;
-  }
-  public int attack(){
-    return atk;
-  }
+ 
   void draw(){
     rect(x,y,20,20);
     if(x < maxRight && right){
