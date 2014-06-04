@@ -22,15 +22,7 @@ public class Player{
   }
   
   public void addPlatform(Platform p){
-    
-    /*for(int i = 0; i < platforms.size(); i ++){
-      if(p.y() >= platforms.get(i).y()){
-        platforms.add(i,p);
-        return 1;
-      }
-    }*/
     platforms.add(p);
-    //return 0; 
   }
   public int getX(){
     return x;
@@ -106,9 +98,11 @@ public class Player{
     for(int i = 0; i < platforms.size(); i++){
     Platform pl = platforms.get(i);
     pl.draw();
-    if(getX() < pl.maxX() && getX() > pl.minX() && getY() < pl.y()){
+    if(getX() < pl.maxX() && 
+       getX() > pl.minX() && 
+       getY() < pl.y()){
       possible.add(pl);
-    }
+      }
     }
     int i = 0;
     int smallest = 640;
