@@ -3,7 +3,7 @@ public class Player{
   private int step, floor, atk, health;
   private ArrayList<Bullet> b;
   private boolean right;
-  private ArrayList<Platform> platforms, possible;
+  private ArrayList<Platform> platforms, possible, antiplats;
   private PImage img;
   
   public Player(){
@@ -16,21 +16,17 @@ public class Player{
     b = new ArrayList<Bullet>();
     platforms = new ArrayList<Platform>();
     possible = new ArrayList<Platform>();
+    antiplats = new ArrayList<Platform>();
   }
   public ArrayList<Bullet> bullets(){
     return b;
   }
   
   public void addPlatform(Platform p){
-    
-    /*for(int i = 0; i < platforms.size(); i ++){
-      if(p.y() >= platforms.get(i).y()){
-        platforms.add(i,p);
-        return 1;
-      }
-    }*/
     platforms.add(p);
-    //return 0; 
+    antiplats.add(new Platform(0,p.minX(),p.y()));
+    antiplats.add(new Platform(p.maxX(),1500,p.y()));
+    
   }
   public int getX(){
     return x;
@@ -39,6 +35,9 @@ public class Player{
     return y;
   }
   
+  public int attack(){
+    return atk;
+  }
   public void damaged(int d){
     health-= d;
   }
@@ -59,7 +58,7 @@ public class Player{
   public void left(){
     right = false;
     if (x > 60)
-    x-= step;
+    x-= step;    
   }
   public void up(){
     if( y > 30)
@@ -85,16 +84,34 @@ public class Player{
     }  
   }
   
-  public void drawAndIdentifyPlatforms() {
+  void draw(){
+    /*for(int index = 0; index < antiplats.size(); index++){
+      Platform pl = antiplats.get(index);
+      if(getX() < pl.maxX() && getX() > pl.minX() && getY() < pl.y()){
+        setFloor(640);
+      }
+    }*/
+    
+    ellipse(x,y,20,20);
+    for(int i = 0; i < b.size(); i++){
+        b.get(i).draw();
+        if(b.get(i).dead()){
+          b.remove(i);
+        }   
+    }
+  
+    
     for(int i = 0; i < platforms.size(); i++){
     Platform pl = platforms.get(i);
     pl.draw();
     if(i >= platforms.size()){
-      p.setFloor(640);
-    }else if(p.getX() < pl.maxX() && p.getX() > pl.minX() && p.getY() < pl.y()){
+      setFloor(640);
+    }else if(getX() < pl.maxX() && getX() > pl.minX() && getY() < pl.y()){
+      
       possible.add(pl);
     }
     }
+     
     int i = 0;
     int smallest = 640;
     while(i < possible.size()){
@@ -103,18 +120,10 @@ public class Player{
       }
       i++;
     }
-    p.setFloor(smallest);
-  }
-  
-  void draw(){
-    ellipse(x,y,20,20);
-    for(int i = 0; i < b.size(); i++){
-        b.get(i).draw();
-        if(b.get(i).dead()){
-          b.remove(i);
-        }   
-    }
-    drawAndIdentifyPlatforms();
+    setFloor(smallest);
+    
+    
+    
   }
 
 }
