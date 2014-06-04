@@ -38,7 +38,9 @@ public class Player{
   public int getY(){
     return y;
   }
-  
+  public int attack(){
+    return atk;
+  }
   public void damaged(int d){
     health-= d;
   }
