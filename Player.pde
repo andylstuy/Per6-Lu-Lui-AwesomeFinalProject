@@ -87,11 +87,14 @@ public class Player{
     }
   
   public void shoot(int gun){
+    //if (b.size() < 4) {
     if(right){
       b.add(new Bullet(x+13,y,250,right,gun));
     }else{
       b.add(new Bullet(x-16,y,250,right,gun));
     }  
+    //}
+    //else b.remove(b.size()-1);
   }
   
   public void drawAndIdentifyPlatforms() {
