@@ -37,7 +37,9 @@ void setup(){
 void draw() {
   background(0,100,190);
   //line(0,650,1500,650); 
+  fill(165,42,42);
   rect(0,650,1500,10); 
+  fill(255);
   textSize(30);
   text("Lives: " +p.getHealth(), 10,25);
   if(p.getHealth() > 0){ 
