@@ -1,11 +1,11 @@
 private Player p;
-private ArrayList<Enemy1> enemies;
+private ArrayList<Enemy> enemies;
 
-public boolean collision(Bullet bull, Enemy1 e){
+public boolean collision(Bullet bull, Enemy e){
   return abs(bull.getX() - e.getX()) < 20 && abs(bull.getY() - e.getY()) < 20;  
    
 }
-public boolean collision(Player p, Enemy1 e){
+public boolean collision(Player p, Enemy e){
   return abs(p.getX() - e.getX()) < 20 && abs(p.getY() - e.getY()) < 20;  
 }
 
@@ -14,13 +14,17 @@ void setup(){
    background(255,255,255);
    frameRate(60);
    p = new Player();
-   enemies = new ArrayList<Enemy1>(); 
+   enemies = new ArrayList<Enemy>(); 
+   enemies.add(new Enemy1(15,65,200));
    enemies.add(new Enemy1(625,625,100)); 
    enemies.add(new Enemy1(500,305,100));
+   enemies.add(new Enemy1(205,125,90));
    enemies.add(new Enemy1(95,525,70));
    enemies.add(new Enemy1(355,525,70));
-   enemies.add(new Enemy1(205,125,90));
-   enemies.add(new Enemy1(15,65,200));
+   
+   enemies.add(new Enemy2(200,500,200));
+   
+   
    
    
    
@@ -43,21 +47,34 @@ void draw() {
     text("You Lose!", 650, 200);
   }
   for(int i = 0; i < enemies.size(); i++){
-    Enemy1 e = enemies.get(i);
+    Enemy e = enemies.get(i);
     e.draw();
     if(collision(p, e)){
-      p.damaged(e.atk);
+      p.damaged(e.attack());
       p.returnToStart();
     }
     for(Bullet bull : p.bullets()){
       if(collision(bull, e)){
         bull.setDead(true);
-        enemies.remove(i);
+        e.damaged(p.attack());
+        if(e.dead()){
+          enemies.remove(i);
+        }
        
       }
     }
     
   }
+  /*for(int i = 0; i < platforms.size(); i++){
+    Platform pl = platforms.get(i);
+    pl.draw();
+    if(p.getX() < pl.maxX() && p.getX() > pl.minX() && p.getY() < pl.y()){
+      p.setFloor(pl.y());
+     
+    }else if(i >= platforms.size()){
+      p.setFloor(640);
+    }
+  }*/
   p.down();
   
   
