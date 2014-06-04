@@ -23,7 +23,9 @@ public class Platform{
   
   
   void draw(){
+    fill(255,165,0);
     rect(minX , y, maxX-minX, w);
+    fill(255);
   }
 
 }
