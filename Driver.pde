@@ -23,11 +23,7 @@ void setup(){
    enemies.add(new Enemy1(355,525,70));
    
    enemies.add(new Enemy2(200,500,200));
-   
-   
-   
-   
-   
+
    p.addPlatform(new Platform(300,700,330));
    p.addPlatform(new Platform(700,1000,400));
    p.addPlatform(new Platform(400,1100,200));
@@ -62,25 +58,10 @@ void draw() {
         if(e.dead()){
           enemies.remove(i);
         }
-       
       }
     }
-    
   }
-  /*for(int i = 0; i < platforms.size(); i++){
-    Platform pl = platforms.get(i);
-    pl.draw();
-    if(p.getX() < pl.maxX() && p.getX() > pl.minX() && p.getY() < pl.y()){
-      p.setFloor(pl.y());
-     
-    }else if(i >= platforms.size()){
-      p.setFloor(640);
-    }
-  }*/
   p.down();
-  
-  
-  
 }
 
 void keyPressed() {
