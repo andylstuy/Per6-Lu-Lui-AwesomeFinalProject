@@ -28,6 +28,9 @@ void setup(){
    p.addPlatform(new Platform(700,1000,400));
    p.addPlatform(new Platform(400,1100,200));
    p.addPlatform(new Platform(400,700,600));
+   
+   p.addWall(new Wall(900,550,100));
+   p.addWall(new Wall(900,0,215));
 }
   
 void draw() {
