@@ -4,6 +4,7 @@ public class Player{
   private ArrayList<Bullet> b;
   private boolean right;
   private ArrayList<Platform> platforms, possible;
+  private ArrayList<Wall> walls;
   private PImage img;
   
   public Player(){
@@ -16,6 +17,7 @@ public class Player{
     b = new ArrayList<Bullet>();
     platforms = new ArrayList<Platform>();
     possible = new ArrayList<Platform>();
+    walls = new ArrayList<Wall>();
   }
   public ArrayList<Bullet> bullets(){
     return b;
@@ -58,7 +60,7 @@ public class Player{
     fall();
   }
   public void up(){
-    if( y > 30)
+    if( y > 100)
     y-= step*10;
     fall();
   }
@@ -82,9 +84,9 @@ public class Player{
     this.floor = f;
   }
   
-    public int getFloor() {
-       return floor; 
-    }
+  public int getFloor() {
+    return floor; 
+  }
   
   public void shoot(int gun){
     //if (b.size() < 4) {
@@ -95,6 +97,26 @@ public class Player{
     }  
     //}
     //else b.remove(b.size()-1);
+  }
+  
+  public void addWall(Wall w){
+    walls.add(w);
+  }
+  
+  public void Wall(){
+    for(int i = 0; i < walls.size(); i++){
+      if(x+10 > walls.get(i).getX() && 
+         x-10 < walls.get(i).getX()+walls.get(i).getW() &&
+         y < walls.get(i).getY() + walls.get(i).getH() &&
+         y > walls.get(i).getY()){
+           if(right == true){
+             left();
+           }else{
+             right();
+           }
+      }
+      walls.get(i).draw();
+    }
   }
   
   public void drawAndIdentifyPlatforms() {
@@ -128,6 +150,7 @@ public class Player{
         }   
     }
     drawAndIdentifyPlatforms();
+    Wall();
   }
 
 }
