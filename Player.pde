@@ -116,6 +116,15 @@ public class Player{
            }
       }
       walls.get(i).draw();
+      for(int j = 0; j < b.size(); j++){
+        Bullet bull = b.get(j);
+        if(bull.getX()+10 > walls.get(i).getX() && 
+         bull.getX()-10 < walls.get(i).getX()+walls.get(i).getW() &&
+         bull.getY() < walls.get(i).getY() + walls.get(i).getH() &&
+         bull.getY() > walls.get(i).getY()){
+           b.remove(j);
+        }
+      }
     }
   }
   
