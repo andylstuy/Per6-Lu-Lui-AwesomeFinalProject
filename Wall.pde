@@ -24,7 +24,9 @@ public class Wall{
   }
   
   void draw(){
+    fill(255,165,0);
     rect(x,y,20,h);
+    fill(255);
   }
 
 }
