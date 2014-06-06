@@ -1,5 +1,7 @@
 private Player p;
 private ArrayList<Enemy> enemies;
+private int level;
+private boolean levEnd;
 
 public boolean collision(Bullet bull, Enemy e){
   return abs(bull.getX() - e.getX()) < 20 && abs(bull.getY() - e.getY()) < 20;  
@@ -7,6 +9,10 @@ public boolean collision(Bullet bull, Enemy e){
 }
 public boolean collision(Player p, Enemy e){
   return abs(p.getX() - e.getX()) < 20 && abs(p.getY() - e.getY()) < 20;  
+}
+
+public boolean Win(){
+  return enemies.size() == 0; 
 }
 
 void setup(){
@@ -31,9 +37,39 @@ void setup(){
    
    p.addWall(new Wall(900,550,100));
    p.addWall(new Wall(900,0,215));
+   
+   level = 1;
+   levEnd = false;
 }
   
 void draw() {
+  if(Win()){
+    
+    level+=1;
+    levEnd = true;
+  }
+  
+  if(levEnd){
+    if(level == 2){
+      for(int i = 0; i < enemies.size(); i++){
+        enemies.remove(i);
+      }
+      enemies.add(new Enemy1(95,525,70));
+      p.returnToStart();
+      levEnd = false;
+    }
+    if(level == 3){
+      for(int i = 0; i < enemies.size(); i++){
+        enemies.remove(i);
+      }
+      //Set up level here
+      
+      levEnd = false;
+    
+    }
+  
+  }
+ 
   background(0,100,190);
   //line(0,650,1500,650); 
   fill(165,42,42);
@@ -47,6 +83,7 @@ void draw() {
     textSize(64);
     text("You Lose!", 650, 200);
   }
+  
   for(int i = 0; i < enemies.size(); i++){
     Enemy e = enemies.get(i);
     e.draw();
@@ -65,6 +102,7 @@ void draw() {
     }
   }
   p.down();
+  
 }
 
 void keyPressed() {
