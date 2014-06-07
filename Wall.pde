@@ -6,7 +6,7 @@ public class Wall{
     this.x = x;
     this.y = y;
     this.h = h;
-    this.w = 20;
+    this.w = 30;
   }
   
   public int getX(){
@@ -25,7 +25,7 @@ public class Wall{
   
   void draw(){
     fill(255,165,0);
-    rect(x,y,20,h);
+    rect(x,y,w,h);
     fill(255);
   }
 
