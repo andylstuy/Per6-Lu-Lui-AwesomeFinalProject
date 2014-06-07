@@ -12,7 +12,7 @@ public class Enemy2 extends Enemy1{
   
   void draw(){
     textSize(12);
-    text(health, x-a/4+1, y-a);
+    text(health+1, x-a/4+1, y-a);
     triangle(x, y-a, x-a*sqrt(3)/2, y+a/2, x+a*sqrt(3)/2, y+a/2);
     if(x < maxRight && right){
       x+= step;
