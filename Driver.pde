@@ -22,6 +22,7 @@ public boolean collision(Enemy1 e, Wall w){
    
 }
 
+
 public boolean collision(Player p, Enemy e){
   return abs(p.getX() - e.getX()) < 20 && abs(p.getY() - e.getY()) < 20;  
 }
@@ -95,7 +96,7 @@ void setup(){
 
    
    level = 1;
-   maxLevel = 3;
+   maxLevel = 5;
    levEnd = false;
    counter = 0;
 }
@@ -174,6 +175,44 @@ void draw() {
       levEnd = false;
     
     }
+    if (level == 4){
+      clearEnemies();
+      clearWalls();
+      clearPlatforms();
+      p.returnToStart();
+      enemies.add(new Enemy5(1400,50));
+      enemies.add(new Enemy5(1300,200));
+      enemies.add(new Enemy5(700,50));
+      enemies.add(new Enemy5(600,600));
+      
+      enemies.add(new Enemy4(700,300,300));
+      enemies.add(new Enemy4(800,400,300));
+      enemies.add(new Enemy4(900,500,300));
+      
+      p.addPlatform(new Platform(0,700,580));
+      p.addPlatform(new Platform(900,1500,500));
+      p.addPlatform(new Platform(400,750,300));
+      
+      
+      levEnd = false;
+    }
+    if(level == 5){
+      clearEnemies();
+      clearWalls();
+      clearPlatforms();
+      p.returnToStart();
+      p.addPlatform(new Platform(300,700,330));
+      p.addPlatform(new Platform(400,1100,200));
+      p.addPlatform(new Platform(400,700,600));
+      p.addPlatform(new Platform(0,500,55));
+      
+      p.addWall(new Wall(250,450,200));
+      p.addWall(new Wall(800,0,215));
+      p.addWall(new Wall(900,350,300));
+      
+      enemies.add(new Enemy6(1200,50,250));
+      levEnd = false;
+    }
     
   
   }
@@ -221,6 +260,12 @@ void draw() {
           }
         }
       
+    }else if(e instanceof Enemy5){
+      ((Enemy5)e).getPlayerLocation(p.getX(), p.getY());
+    }else if(e instanceof Enemy6){
+      if(((Enemy6)e).spawn()){
+        enemies.add(new Enemy1(e.getX(),e.getY(),(int)random(100) + 100));
+      }
     }
     e.draw();
     if(collision(p, e)){
