@@ -19,86 +19,15 @@ public class Player{
     possible = new ArrayList<Platform>();
     walls = new ArrayList<Wall>();
   }
+  
   public ArrayList<Bullet> bullets(){
     return b;
   }
   
-  public void addPlatform(Platform p){
-    platforms.add(p);
+  //Walls 
+  public ArrayList<Wall> walls(){
+    return walls;
   }
-  public int getX(){
-    return x;
-  }
-  public int getY(){
-    return y;
-  }
-  public int attack(){
-    return atk;
-  }
-  public void damaged(int d){
-    health-= d;
-  }
-  public int getHealth(){
-    return health;
-  }
-  
-  public void returnToStart(){
-    x = 70;
-    y = 640;
-  }
-  
-  public void right(){
-    right = true;
-    if(x < 1450)
-    x+= step;
-    fall();
-  }
-  public void left(){
-    right = false;
-    if (x > 60)
-    x-= step;
-    fall();
-  }
-  public void up(){
-    if( y > 100)
-    y-= step*10;
-    fall();
-  }
-  public void fall() {
-    loadPixels();
-    for (int x = getX()-10; x < getX()+10; x++) {
-       for (int y = getY(); y < 640; y++) { 
-         if (pixels[x+y*width] == color(255,255,255))
-         setFloor(640);
-       }
-    }
-  }
-  
-  public void down(){
-    if(y < floor ){
-      y += 5;
-    }
-  }
-  
-  public void setFloor(int f){
-    this.floor = f;
-  }
-  
-  public int getFloor() {
-    return floor; 
-  }
-  
-  public void shoot(int gun){
-    //if (b.size() < 4) {
-    if(right){
-      b.add(new Bullet(x+13,y,250,right,gun));
-    }else{
-      b.add(new Bullet(x-16,y,250,right,gun));
-    }  
-    //}
-    //else b.remove(b.size()-1);
-  }
-  
   public void addWall(Wall w){
     walls.add(w);
   }
@@ -128,6 +57,25 @@ public class Player{
     }
   }
   
+  //Platforms
+  public ArrayList<Platform> platforms(){
+    return platforms;
+  }
+  
+  public void addPlatform(Platform p){
+    platforms.add(p);
+  }
+  
+  public void fall(){
+    loadPixels();
+    for (int x = getX()-10; x < getX()+10; x++) {
+       for (int y = getY(); y < 640; y++) { 
+         if (pixels[x+y*width] == color(0,255,0))
+         setFloor(640);
+       }
+    }
+  }
+  
   public void drawAndIdentifyPlatforms() {
     for(int i = 0; i < platforms.size(); i++){
     Platform pl = platforms.get(i);
@@ -146,12 +94,86 @@ public class Player{
       }
       i++;
     }
+    
     setFloor(smallest);
+    
     fall();
   }
   
+  
+  public int getX(){
+    return x;
+  }
+  public int getY(){
+    return y;
+  }
+  public int attack(){
+    return atk;
+  }
+  public void damaged(int d){
+    health-= d;
+  }
+  public int getHealth(){
+    return health;
+  }
+  
+  public void returnToStart(){
+    x = 70;
+    y = 640;
+  }
+  
+  public void right(){
+    right = true;
+    if(x < 1490)
+    x+= step;
+    fall();
+  }
+  public void left(){
+    right = false;
+    if (x > 10)
+    x-= step;
+    fall();
+  }
+  public void up(){
+    if( y > 100)
+    y-= step*5;
+    fall();
+  }
+  
+  
+  public void down(){
+    if(y < floor ){
+      y += 3;
+    }
+  }
+  
+  public void setFloor(int f){
+    this.floor = f;
+  }
+  
+  public int getFloor() {
+    return floor; 
+  }
+  
+  public void shoot(int gun){
+    //if (b.size() < 4) {
+    if(right){
+      b.add(new Bullet(x+13,y,250,right,gun,color(0,255,0)));
+    }else{
+      b.add(new Bullet(x-16,y,250,right,gun,color(0,255,0)));
+    }  
+    //}
+    //else b.remove(b.size()-1);
+  }
+  
+  
+  
+  
+  
   void draw(){
+    fill(0,255,0);
     ellipse(x,y,20,20);
+    fill(255);
     for(int i = 0; i < b.size(); i++){
         b.get(i).draw();
         if(b.get(i).dead()){
