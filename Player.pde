@@ -136,14 +136,14 @@ public class Player{
   }
   public void up(){
     if( y > 100)
-    y-= step*5;
+    y-= step*9;
     fall();
   }
   
   
   public void down(){
     if(y < floor ){
-      y += 3;
+      y += 5;
     }
   }
   
