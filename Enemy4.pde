@@ -1,8 +1,8 @@
 public class Enemy4 extends Enemy3{
  
-  private ArrayList<Bullet> b;
-  private int a;
-  private boolean right;
+  protected ArrayList<Bullet> b;
+  protected int a;
+  protected boolean right;
   protected int pX,pY;
   
   public Enemy4(int x, int y, int range){
