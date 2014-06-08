@@ -11,10 +11,24 @@ public boolean collision(Bullet bull, Player p){
   return abs(bull.getX() - p.getX()) < 20 && abs(bull.getY() - p.getY()) < 20;  
    
 }
+public boolean collision(Bullet bull, Wall w){
+  return bull.getX() > w.getX() && bull.getX() < w.getX()+ w.getW() && bull.getY() > w.getY() && bull.getY() < w.getY()+w.getH();  
+   
+}
+
+public boolean collision(Enemy1 e, Wall w){
+  return (e.getX() > w.getX() && e.getX() < w.getX()+ w.getW() && e.getY() > w.getY() && e.getY() < w.getY()+w.getH()) ||
+  (e.getX()+10 > w.getX() && e.getX()+10 < w.getX()+ w.getW() && e.getY() > w.getY() && e.getY() < w.getY()+w.getH());  
+   
+}
 
 public boolean collision(Player p, Enemy e){
   return abs(p.getX() - e.getX()) < 20 && abs(p.getY() - e.getY()) < 20;  
 }
+
+
+
+
 
 public boolean Win(){
   return enemies.size() == 0; 
@@ -60,22 +74,25 @@ void setup(){
    frameRate(60);
    p = new Player();
    enemies = new ArrayList<Enemy>(); 
-   enemies.add(new Enemy1(15,65,200));
-   enemies.add(new Enemy1(625,625,100)); 
+   enemies.add(new Enemy1(615,170,200));
+   enemies.add(new Enemy1(625,625,110)); 
    enemies.add(new Enemy1(500,305,100));
-   enemies.add(new Enemy1(205,125,90));
+   enemies.add(new Enemy1(1005,170,90));
    enemies.add(new Enemy1(95,525,70));
    enemies.add(new Enemy1(355,525,70));
    
-   enemies.add(new Enemy2(200,500,200));
+   enemies.add(new Enemy2(1230,480,200));
 
    p.addPlatform(new Platform(300,700,330));
-   p.addPlatform(new Platform(700,1000,400));
+   p.addPlatform(new Platform(1000,1500,500));
    p.addPlatform(new Platform(400,1100,200));
    p.addPlatform(new Platform(400,700,600));
+   p.addPlatform(new Platform(0,500,555));
    
-   p.addWall(new Wall(900,550,100));
+   p.addWall(new Wall(900,350,300));
    p.addWall(new Wall(900,0,215));
+   
+
    
    level = 1;
    maxLevel = 3;
@@ -84,6 +101,8 @@ void setup(){
 }
   
 void draw() {
+  
+  
   if(Win()){
    
     if(level < maxLevel){
@@ -103,11 +122,28 @@ void draw() {
       clearEnemies();
       clearWalls();
       clearPlatforms();
-      enemies.add(new Enemy1(95,525,70));
-      enemies.add(new Enemy3(100,100,100));
-      enemies.add(new Enemy4(800,400,100));
-      
       p.returnToStart();
+      
+      enemies.add(new Enemy1(150,575,220));
+      enemies.add(new Enemy1(150,425,320));
+      enemies.add(new Enemy1(150,225,120));
+      enemies.add(new Enemy3(710,100,300));
+      enemies.add(new Enemy4(800,400,100));
+      enemies.add(new Enemy2(800,380,100));
+      enemies.add(new Enemy3(800,400,120));
+      enemies.add(new Enemy2(1200,630,200));
+      
+      
+      p.addPlatform(new Platform(0,700,600));
+      p.addPlatform(new Platform(900,1500,400));
+      p.addPlatform(new Platform(300,750,500));
+      p.addPlatform(new Platform(400,700,150));
+      
+      p.addWall(new Wall(750,450,200));
+      p.addWall(new Wall(900,0,215));
+      p.addWall(new Wall(100,300,255));
+      
+      
       levEnd = false;
       
     }
@@ -115,16 +151,35 @@ void draw() {
       clearEnemies();
       clearWalls();
       clearPlatforms();
+      p.returnToStart();
       
       //Set up level here
+      p.addWall(new Wall(200,400,250));
+      p.addWall(new Wall(900,400,250));
+      p.addWall(new Wall(600,400,250));
+      p.addWall(new Wall(200,0,270));
+      p.addWall(new Wall(900,0,270));
+      p.addWall(new Wall(600,0,270));
       
+      enemies.add(new Enemy4(400,400,250));
+      enemies.add(new Enemy4(750,400,250));
+      enemies.add(new Enemy4(1100,400,250));
       
+      enemies.add(new Enemy3(300,400,250));
+      enemies.add(new Enemy3(650,400,250));
+      enemies.add(new Enemy3(1000,400,250));
+      
+      enemies.add(new Enemy2(1200,630,200));
+     
       levEnd = false;
     
     }
+    
   
   }
- 
+   
+  
+  
   background(0,100,190);
   //line(0,650,1500,650); 
   fill(165,42,42);
@@ -150,7 +205,22 @@ void draw() {
           p.damaged(e.atk);
           p.returnToStart();
         }
+        for(int k = 0; k < p.walls().size(); k++){
+          Wall wall = p.walls().get(k);
+          if(collision(bull,wall)){
+            ((Enemy4)e).bullets().remove(j);
+          }
+        }
       }
+    }
+    if(e instanceof Enemy1){
+      for(int k = 0; k < p.walls().size(); k++){
+          Wall wall = p.walls().get(k);
+          if(collision(((Enemy1)e),wall)){
+            ((Enemy1)e).reverse();
+          }
+        }
+      
     }
     e.draw();
     if(collision(p, e)){
