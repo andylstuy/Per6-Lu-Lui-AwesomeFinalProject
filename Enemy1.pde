@@ -20,6 +20,10 @@ public class Enemy1 extends Enemy{
     dead = false;
   }
   
+  public void reverse(){
+    right = !right;
+  }
+  
  
   void draw(){
     rect(x,y,20,20);
