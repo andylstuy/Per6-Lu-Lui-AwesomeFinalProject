@@ -91,6 +91,7 @@ void setup(){
    p.addPlatform(new Platform(0,500,555));
    
    p.addWall(new Wall(900,350,300));
+   p.addPlatform(new Platform(890,940,350));
    p.addWall(new Wall(900,0,215));
    
 
@@ -141,8 +142,10 @@ void draw() {
       p.addPlatform(new Platform(400,700,150));
       
       p.addWall(new Wall(750,450,200));
+      p.addPlatform(new Platform(740,790,450));
       p.addWall(new Wall(900,0,215));
       p.addWall(new Wall(100,300,255));
+      p.addPlatform(new Platform(90,140,300));
       
       
       levEnd = false;
@@ -156,8 +159,11 @@ void draw() {
       
       //Set up level here
       p.addWall(new Wall(200,400,250));
+      p.addPlatform(new Platform(180,950,400));
       p.addWall(new Wall(900,400,250));
+      p.addPlatform(new Platform(180,950,255));
       p.addWall(new Wall(600,400,250));
+      //p.addPlatform(new Platform(580,650,400));
       p.addWall(new Wall(200,0,270));
       p.addWall(new Wall(900,0,270));
       p.addWall(new Wall(600,0,270));
@@ -207,8 +213,10 @@ void draw() {
       p.addPlatform(new Platform(0,500,55));
       
       p.addWall(new Wall(250,450,200));
+      p.addPlatform(new Platform(240,290,450));
       p.addWall(new Wall(800,0,215));
       p.addWall(new Wall(900,350,300));
+      p.addPlatform(new Platform(890,940,350));
       
       enemies.add(new Enemy6(1200,50,250));
       levEnd = false;
@@ -311,12 +319,17 @@ void keyPressed() {
     p.right();
     p.up();
   }
+  
+  if(key == 's'){
+    p.drop();
+  }
   if (key == 'j'){
     p.shoot(1);
   }
   if (key == 'k'){
     p.shoot(2);
   }
+  
   
   //Cheat to pass level
   if(key == 'p'){
