@@ -161,6 +161,10 @@ public class Player{
     return floor; 
   }
   
+  public void setHealth(int h){
+    this.health= h;
+  }
+  
   public void shoot(int gun){
     //if (b.size() < 4) {
     if(right){
