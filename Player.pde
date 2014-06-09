@@ -147,6 +147,12 @@ public class Player{
     }
   }
   
+  public void drop(){
+    if(y < 640){
+      y+= 10;
+    }
+  }
+  
   public void setFloor(int f){
     this.floor = f;
   }
@@ -180,8 +186,9 @@ public class Player{
           b.remove(i);
         }   
     }
-    drawAndIdentifyPlatforms();
     Wall();
+    drawAndIdentifyPlatforms();
+    
   }
 
 }
