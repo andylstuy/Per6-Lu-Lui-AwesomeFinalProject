@@ -110,8 +110,9 @@ void draw() {
     if(level < maxLevel){
       level+=1;
       levEnd = true;
+      p.setHealth(p.getHealth()+1);
     }else{
-      fill(255);
+      
       textSize(64);
       text("You Win!", 500, 300);
    
